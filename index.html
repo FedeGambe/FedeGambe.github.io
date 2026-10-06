@@ -54,6 +54,8 @@ header.top button:hover{background:var(--ink);color:var(--bg)}
 .card:hover .cover{transform:scale(1.04)}
 .body{position:relative;padding:20px 20px 0;display:flex;flex-direction:column;gap:10px}
 .meta{display:flex;justify-content:space-between;font:600 .72rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.07em;color:#ffffffbb}
+.card.light .body,.card.light .meta,.card.light p{color:#111;transition:color .3s}
+.card.light:hover .body,.card.light:hover .meta,.card.light:hover p,.card.light:focus-within .body,.card.light:focus-within .meta,.card.light:focus-within p{color:#fff}
 .card h2{font:700 1.6rem/1.1 Georgia,serif;margin:0;letter-spacing:-.01em}
 .card p{margin:0;color:#ffffffd9;font-size:.92rem}
 .foot{position:absolute;left:0;right:0;bottom:0;padding:48px 20px 18px;background:linear-gradient(transparent,#000d)}
@@ -107,6 +109,7 @@ footer a:hover{color:var(--acc)}
 <script>
 // progetti.json è generato da `python -m copertine sito -o <questa cartella>` (repo copertine): non modificarlo a mano
 let P=[];
+const LIGHT=["Master_s_thesis_Data_science"]; // cover chiare: testo nero (progetti.json è generato, non ci metto flag)
 
 const $=s=>document.querySelector(s),grid=$("#grid"),chips=$("#chips");
 let tags,tag=null;
@@ -114,7 +117,7 @@ let tags,tag=null;
 function render(){
 tags=[...new Set(P.flatMap(p=>p.tags))].sort();
 grid.innerHTML=P.map((p,i)=>`
- <article class="card" style="animation-delay:${i*80}ms" data-s="${(p.t+" "+p.d+" "+p.tags.join(" ")).toLowerCase()}" data-t="${p.tags.join("|")}">
+ <article class="card${LIGHT.includes(p.repo)?" light":""}" style="animation-delay:${i*80}ms" data-s="${(p.t+" "+p.d+" "+p.tags.join(" ")).toLowerCase()}" data-t="${p.tags.join("|")}">
   <img class="cover" src="${p.img}" alt="" loading="lazy">
   <div class="body">
    <div class="meta"><span>N° ${String(i+1).padStart(2,"0")}</span><span>${p.y}${p.live?" · ● online":""}</span></div>
