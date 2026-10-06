@@ -1,11 +1,172 @@
 <!doctype html>
 <html lang="it">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Progetti</title>
-<style>body{font:16px/1.6 system-ui,sans-serif;max-width:36rem;margin:3rem auto;padding:0 1rem}</style>
-<h1>Progetti</h1>
-<ul>
-  <li><a href="/when-to-buy-iphone/">Quando comprare l'iPhone</a></li>
-  <li><a href="https://tesi.federicogamberini.it/">Tesi magistrale</a></li>
-</ul>
+<link rel="icon" type="image/svg+xml" href="g-icon.svg">
+<title>Progetti · Federico Gamberini</title>
+<meta name="description" content="Data science, analisi predittiva e strumenti di scraping: i progetti di Federico Gamberini.">
+<style>
+:root{
+  --g1:#fff3dc;--g2:#e9c9a0;--g3:#e2d6bf;--bg:#f4efe6;--ink:#1c1b19;--mute:#6b665c;--card:#fbf8f2;--line:#d9d1c0;--acc:#d9482b;--acc2:#1f4e5f;
+  --shadow:0 1px 0 var(--line),0 12px 30px -18px rgba(28,27,25,.35);
+}
+:root[data-theme=dark]{
+  --g1:#241009;--g2:#071c23;--g3:#050504;--bg:#14130f;--ink:#efe9dc;--mute:#9a9486;--card:#1c1a15;--line:#33302a;--acc:#ff6a45;--acc2:#6cc3d9;
+  --shadow:0 1px 0 var(--line),0 12px 30px -18px #000;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Inter",system-ui,sans-serif;
+  background:radial-gradient(900px 600px at 10% 0%,var(--g1),transparent 70%),radial-gradient(900px 700px at 100% 100%,var(--g2),transparent 70%),var(--g3);background-attachment:fixed;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.55;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .45 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:0;z-index:10;transition:background .35s,backdrop-filter .35s,box-shadow .35s}
+header.top.scrolled{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 60%,transparent);box-shadow:0 1px 0 var(--line)}
+header.top .wrap{transition:padding .35s}
+header.top.scrolled .wrap{padding-top:12px;padding-bottom:12px}
+header.top img{transition:transform .35s}
+header.top.scrolled img{transform:rotate(360deg) scale(.9)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;padding:22px 20px;font:600 .8rem/1 ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+header.top button{background:none;border:1px solid var(--ink);color:var(--ink);padding:8px 12px;font:inherit;cursor:pointer;border-radius:999px}
+header.top button:hover{background:var(--ink);color:var(--bg)}
+.hero{padding:56px 0 40px;border-bottom:3px solid var(--ink);position:relative}
+.hero h1{font:800 clamp(2.4rem,7.5vw,5.6rem)/.95 Georgia,"Times New Roman",serif;letter-spacing:-.04em;margin:0}
+.hero h1 em{color:var(--acc);font-style:italic}
+.hero p{color:var(--mute);font-size:1.1rem;margin:24px 0 0}
+.stats{display:flex;gap:36px;margin-top:32px;font:600 .8rem/1.3 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
+.stats b{display:block;font:800 2.4rem/1 Georgia,serif;color:var(--ink);letter-spacing:-.02em}
+.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:28px 0 8px;}
+.tools input{flex:1 1 220px;padding:12px 16px;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);font:inherit;border-radius:999px;outline:none}
+.tools input:focus{box-shadow:0 0 0 3px var(--acc)}
+.chip{border:1.5px solid var(--line);background:transparent;color:var(--ink);padding:8px 14px;border-radius:999px;font:600 .8rem/1 ui-monospace,Consolas,monospace;cursor:pointer}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;padding:20px 0 64px}
+.card{position:relative;aspect-ratio:5/7;min-width:0;color:#fff;background:#14161f;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;box-shadow:0 18px 40px -22px #000a;
+  transition:transform .25s,box-shadow .25s;opacity:0;transform:translateY(16px);animation:in .6s forwards}
+.card:hover{transform:translateY(-6px)}
+@keyframes in{to{opacity:1;transform:none}}
+.card[hidden]{display:none}
+.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;transition:transform .6s}
+.card:hover .cover{transform:scale(1.04)}
+.body{position:relative;padding:20px 20px 0;display:flex;flex-direction:column;gap:10px}
+.meta{display:flex;justify-content:space-between;font:600 .72rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.07em;color:#ffffffbb}
+.card h2{font:700 1.6rem/1.1 Georgia,serif;margin:0;letter-spacing:-.01em}
+.card p{margin:0;color:#ffffffd9;font-size:.92rem}
+.foot{position:absolute;left:0;right:0;bottom:0;padding:48px 20px 18px;background:linear-gradient(transparent,#000d)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:600 .7rem/1 ui-monospace,Consolas,monospace;border:1px solid #ffffff55;padding:5px 8px;border-radius:999px;color:#fffd}
+.card::after{content:"";position:absolute;inset:0;background:#000;opacity:0;transition:opacity .3s;pointer-events:none}
+.links{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;gap:12px;opacity:0;transition:opacity .3s}
+.card:hover::after{opacity:.72}
+.card:hover .links,.card:focus-within .links{opacity:1}
+.card:focus-within::after{opacity:.72}
+.links a{min-width:110px;text-align:center;padding:12px 18px;border:1.5px solid #fff;font:700 .8rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;border-radius:4px}
+.links a.main{background:#fff;color:#14161f}
+.links a:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+@media(hover:none){.links{opacity:1;inset:auto 0 70px 0}.card::after{display:none}}
+.empty{padding:60px 0;text-align:center;color:var(--mute);display:none}
+footer{border-top:3px solid var(--ink);padding:28px 0 48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:600 .8rem/1 ui-monospace,Consolas,monospace;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+footer a:hover{color:var(--acc)}
+@media(prefers-reduced-motion:reduce){.card{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><span style="display:flex;align-items:center;gap:10px"><img src="g-icon.svg" alt="" width="22" height="22">Federico Gamberini / Archivio</span>
+    <button id="theme" aria-label="Cambia tema">◐ Tema</button></div></header>
+<div class="wrap">
+  
+
+  <section class="hero">
+    <h1>Progetti,<br><em>dati e modelli</em></h1>
+    <p>Analisi statistica, machine learning e strumenti di scraping. Un archivio dei progetti su cui sto lavorando o che ho concluso.</p>
+    <div class="stats">
+      <div><b id="n-all">0</b>progetti</div>
+      <div><b id="n-live">0</b>online</div>
+      <div><b id="n-tags">0</b>temi</div>
+    </div>
+  </section>
+
+  <div class="tools">
+    <input id="q" type="search" placeholder="Cerca un progetto, una tecnica…" aria-label="Cerca">
+    <div id="chips" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+  </div>
+
+  <main class="grid" id="grid"></main>
+  <p class="empty" id="empty">Nessun progetto corrisponde alla ricerca.</p>
+
+  <footer>
+    <span>© <span id="y"></span> Federico Gamberini</span>
+    <a href="https://github.com/FedeGambe">GitHub →</a>
+  </footer>
+</div>
+
+<script>
+// ponytail: elenco statico; per aggiungere un progetto basta una riga qui sotto
+const P=[
+ {t:"Quando comprare l'iPhone",d:"Tracker dei prezzi iPhone con analisi temporale, previsioni e scraping automatico.",
+  tags:["Scraping","Previsioni","Serie storiche"],y:2026,live:"/when-to-buy-iphone/",repo:"when-to-buy-iphone",img:"img/when-to-buy-iphone.svg"},
+ {t:"Tesi magistrale",d:"Analisi statistiche e predittive: regressione logistica, clustering, modelli ML e DL per previsione e classificazione.",
+  tags:["Statistica","Machine Learning","Deep Learning"],y:2026,live:"https://tesi.federicogamberini.it/",repo:"Master_s_thesis_Data_science",img:"img/tesi.svg"},
+ {t:"Target Maturity ETF Planner",d:"Scraping dei rendimenti e simulazione di strategie di investimento con ETF obbligazionari a scadenza.",
+  tags:["Finanza","Scraping","Simulazione"],y:2026,repo:"Target_Maturity_ETF_Planner",img:"img/etf.svg"},
+ {t:"Vehicle Price Monitor",d:"Monitoraggio dei prezzi delle auto usate: web scraping e analisi per trovare le offerte migliori per prezzo, chilometraggio e distanza.",
+  tags:["Scraping","Analisi"],y:2026,repo:"Vehicle_Price_Monitor",img:"img/auto.svg"},
+ {t:"Bitcoin Prediction",d:"Crypto Trend & Sentiment: previsione del prezzo di Bitcoin e del Fear and Greed Index con LSTM, LightGBM e Random Forest.",
+  tags:["Machine Learning","Deep Learning","Finanza"],y:2025,repo:"Bitcoin_Prediction",img:"img/bitcoin.svg"},
+];
+
+const $=s=>document.querySelector(s),grid=$("#grid"),chips=$("#chips");
+const tags=[...new Set(P.flatMap(p=>p.tags))].sort();
+let tag=null;
+
+grid.innerHTML=P.map((p,i)=>`
+ <article class="card" style="animation-delay:${i*80}ms" data-s="${(p.t+" "+p.d+" "+p.tags.join(" ")).toLowerCase()}" data-t="${p.tags.join("|")}">
+  <img class="cover" src="${p.img}" alt="" loading="lazy">
+  <div class="body">
+   <div class="meta"><span>N° ${String(i+1).padStart(2,"0")}</span><span>${p.y}${p.live?" · ● online":""}</span></div>
+   <h2>${p.t}</h2><p>${p.d}</p>
+   </div>
+   <div class="foot"><div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div></div>
+   <div class="links">${p.live?`<a class="main" href="${p.live}">Apri →</a>`:""}<a class="${p.live?"":"main"}" href="https://github.com/FedeGambe/${p.repo}">Codice</a></div>
+ </article>`).join("");
+
+chips.innerHTML=["Tutti",...tags].map((t,i)=>`<button class="chip" aria-pressed="${i==0}" data-t="${i?t:""}">${t}</button>`).join("");
+
+function filter(){
+  const q=$("#q").value.trim().toLowerCase();let n=0;
+  document.querySelectorAll(".card").forEach(c=>{
+    const ok=c.dataset.s.includes(q)&&(!tag||c.dataset.t.split("|").includes(tag));
+    c.hidden=!ok;n+=ok;
+  });
+  $("#empty").style.display=n?"none":"block";
+}
+chips.onclick=e=>{
+  const b=e.target.closest(".chip");if(!b)return;
+  tag=b.dataset.t||null;
+  chips.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  filter();
+};
+$("#q").oninput=filter;
+
+$("#n-all").textContent=P.length;
+$("#n-live").textContent=P.filter(p=>p.live).length;
+$("#n-tags").textContent=tags.length;
+$("#y").textContent=new Date().getFullYear();
+
+const hd=document.querySelector("header.top");
+addEventListener("scroll",()=>hd.classList.toggle("scrolled",scrollY>24),{passive:true});
+
+// tema: rispetta il sistema, override salvato se localStorage disponibile
+const root=document.documentElement;
+try{const s=localStorage.theme;if(s)root.dataset.theme=s;else root.dataset.theme="dark"}catch{root.dataset.theme="dark"}
+$("#theme").onclick=()=>{
+  const d=root.dataset.theme=="dark"?"light":"dark";root.dataset.theme=d;
+  try{localStorage.theme=d}catch{}
+};
+</script>
+</body>
+</html>
