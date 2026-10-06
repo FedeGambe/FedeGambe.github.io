@@ -52,13 +52,13 @@ header.top button:hover{background:var(--ink);color:var(--bg)}
 .card[hidden]{display:none}
 .cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;transition:transform .6s}
 .card:hover .cover{transform:scale(1.04)}
-.body{position:relative;padding:20px 20px 0;display:flex;flex-direction:column;gap:10px}
+.body{position:relative;z-index:1;padding:20px 20px 0;display:flex;flex-direction:column;gap:10px}
 .meta{display:flex;justify-content:space-between;font:600 .72rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.07em;color:#ffffffbb}
 .card.light .body,.card.light .meta,.card.light p{color:#111;transition:color .3s}
 .card.light:hover .body,.card.light:hover .meta,.card.light:hover p,.card.light:focus-within .body,.card.light:focus-within .meta,.card.light:focus-within p{color:#fff}
 .card h2{font:700 1.6rem/1.1 Georgia,serif;margin:0;letter-spacing:-.01em}
 .card p{margin:0;color:#ffffffd9;font-size:.92rem}
-.foot{position:absolute;left:0;right:0;bottom:0;padding:48px 20px 18px;background:linear-gradient(transparent,#000d)}
+.foot{z-index:1;position:absolute;left:0;right:0;bottom:0;padding:48px 20px 18px;background:linear-gradient(transparent,#000d)}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tags span{font:600 .7rem/1 ui-monospace,Consolas,monospace;border:1px solid #ffffff55;padding:5px 8px;border-radius:999px;color:#fffd}
 .card::after{content:"";position:absolute;inset:0;background:#000;opacity:0;transition:opacity .3s;pointer-events:none}
