@@ -47,7 +47,7 @@
             "Simulazione"
         ],
         "y": 2026,
-        "img": "img/etf.svg"
+        "img": "img/2026-10-07-Target_Maturity_ETF_Planner.svg"
     },
     {
         "repo": "Vehicle_Price_Monitor",
@@ -58,7 +58,7 @@
             "Analisi"
         ],
         "y": 2026,
-        "img": "img/auto.svg"
+        "img": "img/2026-10-07-Vehicle_Price_Monitor.svg"
     },
     {
         "repo": "Bitcoin_Prediction",
