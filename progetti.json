@@ -25,15 +25,6 @@
         "repo": "Vehicle_Price_Monitor"
     },
     {
-        "repo": "Bitcoin_Prediction",
-        "t": "Bitcoin Prediction",
-        "d": "Crypto Trend & Sentiment: previsione del prezzo di Bitcoin e del Fear and Greed Index con LSTM, LightGBM e Random Forest.",
-        "tags": [
-            "Machine Learning",
-            "Deep Learning",
-            "Finanza"
-        ],
-        "y": 2025,
-        "img": "img/bitcoin.svg"
+        "repo": "Bitcoin_Prediction"
     }
 ]
