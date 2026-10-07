@@ -107,7 +107,7 @@ footer a:hover{color:var(--acc)}
 </div>
 
 <script>
-// progetti.json è generato da `python -m copertine sito -o <questa cartella>` (repo copertine): non modificarlo a mano
+// progetti.json: voci complete, oppure solo {"repo"}: la scheda si legge da <repo>/docs/progetto.json (cover in docs/img/)
 let P=[];
 const LIGHT=["Master_s_thesis_Data_science"]; // cover chiare: testo nero (progetti.json è generato, non ci metto flag)
 
@@ -150,7 +150,9 @@ $("#n-live").textContent=P.filter(p=>p.live).length;
 $("#n-tags").textContent=tags.length;
 $("#y").textContent=new Date().getFullYear();
 }
-fetch("progetti.json").then(r=>r.json()).then(d=>{P=d;render()}).catch(()=>{$("#empty").textContent="Impossibile caricare i progetti.";$("#empty").style.display="block"});
+const RAW="https://raw.githubusercontent.com/FedeGambe/";
+const scheda=async p=>{if(p.t)return p;try{const b=RAW+p.repo+"/main/docs/",j=await(await fetch(b+"progetto.json")).json();return{...j,...p,img:b+j.img}}catch{return null}};
+fetch("progetti.json").then(r=>r.json()).then(d=>Promise.all(d.map(scheda))).then(d=>{P=d.filter(Boolean);render()}).catch(()=>{$("#empty").textContent="Impossibile caricare i progetti.";$("#empty").style.display="block"});
 
 const hd=document.querySelector("header.top");
 addEventListener("scroll",()=>hd.classList.toggle("scrolled",scrollY>24),{passive:true});

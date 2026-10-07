@@ -13,52 +13,16 @@
         "img": "img/2026-10-06-Master_s_thesis_Data_science.svg"
     },
     {
-        "repo": "Wally",
-        "t": "Wally",
-        "d": "App di finanza personale: entrate, spese e consumi sempre sotto controllo.",
-        "tags": [
-            "Finanza",
-            "App"
-        ],
-        "y": 2026,
-        "live": "https://finanza-personale-rose.vercel.app",
-        "img": "img/2026-10-06-Wally.svg"
+        "repo": "Wally"
     },
     {
-        "repo": "When_to_buy_iPhone",
-        "t": "Quando comprare l'iPhone",
-        "d": "Tracker dei prezzi iPhone con analisi temporale, previsioni e scraping automatico.",
-        "tags": [
-            "Scraping",
-            "Previsioni",
-            "Serie storiche"
-        ],
-        "y": 2026,
-        "live": "/When_to_buy_iPhone/",
-        "img": "img/2026-10-06-when-to-buy-iphone.svg"
+        "repo": "When_to_buy_iPhone"
     },
     {
-        "repo": "Target_Maturity_ETF_Planner",
-        "t": "Target Maturity ETF Planner",
-        "d": "Scraping dei rendimenti e simulazione di strategie di investimento con ETF obbligazionari a scadenza.",
-        "tags": [
-            "Finanza",
-            "Scraping",
-            "Simulazione"
-        ],
-        "y": 2026,
-        "img": "img/2026-10-07-Target_Maturity_ETF_Planner.svg"
+        "repo": "Target_Maturity_ETF_Planner"
     },
     {
-        "repo": "Vehicle_Price_Monitor",
-        "t": "Vehicle Price Monitor",
-        "d": "Monitoraggio dei prezzi delle auto usate: web scraping e analisi per trovare le offerte migliori per prezzo, chilometraggio e distanza.",
-        "tags": [
-            "Scraping",
-            "Analisi"
-        ],
-        "y": 2026,
-        "img": "img/2026-10-07-Vehicle_Price_Monitor.svg"
+        "repo": "Vehicle_Price_Monitor"
     },
     {
         "repo": "Bitcoin_Prediction",
