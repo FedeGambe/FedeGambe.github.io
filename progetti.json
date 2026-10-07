@@ -38,7 +38,7 @@
         "img": "img/2026-10-06-when-to-buy-iphone.svg"
     },
     {
-        "repo": "bond-etf-target-maturity-analysis",
+        "repo": "Target_Maturity_ETF_Planner",
         "t": "Target Maturity ETF Planner",
         "d": "Scraping dei rendimenti e simulazione di strategie di investimento con ETF obbligazionari a scadenza.",
         "tags": [
