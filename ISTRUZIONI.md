@@ -51,6 +51,7 @@ Crea in `docs/img/` tre file con questi nomi esatti:
 | `favicon.svg` | icona della scheda del browser (64×64, angoli arrotondati) |
 | `cover_sfondo.svg` | **solo il fondo** della cover (colore, sfumatura, grafica leggera, grana), senza il soggetto. Su telefono riempie tutta la cover e la card, titolo compreso |
 | `cover_soggetto.svg` | **solo il soggetto** (la B di Bitcoin, l'auto, l'icona di Wally…) su fondo trasparente, con il riquadro stretto attorno al disegno. Su telefono va sotto il titolo |
+| `banner_sfondo.svg`, `banner_soggetto.svg` | solo per le **dashboard**: i due livelli del banner in testa alla pagina (fondo; soggetto a destra su desktop, sotto il titolo su telefono). Di solito sono una copia di `cover_sfondo.svg` e `cover_soggetto.svg` |
 
 **Sfondo e soggetto sono la fonte**: `cover_orizzontale.svg` e `cover_verticale.svg` si rigenerano da loro con `python skill-vetrina/crea-copertina/componi.py docs/img` (fondo su tutta la tela, soggetto nella metà bassa). Per spezzare una cover esistente nei due livelli: `livelli.py` e poi `livelli_bbox.js`, che stringe il riquadro del soggetto e ne scrive larghezza e altezza.
 
