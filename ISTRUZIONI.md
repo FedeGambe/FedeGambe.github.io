@@ -146,7 +146,7 @@ Poi fai commit e push. GitHub Pages aggiorna il sito in circa un minuto.
 | grafica, testi o struttura del sito | `index.html` | questa |
 | descrizione, tag e link della repo su GitHub | `gh repo edit` (o la rotella ⚙ di *About*) | progetto |
 
-La tesi (`Master_s_thesis_Data_science`) ha la voce scritta per intero in `progetti.json`, con la cover in `img/` di questa repo. Le voci complete (con `t`) non leggono `docs/progetto.json`: per cambiarle si modifica direttamente `progetti.json`.
+`progetti.json` accetta anche una voce scritta per intero (con `t`, `d`, `tags`, `y`, `live`, `img` e la cover in `img/` di questa repo). Una voce così non legge `docs/progetto.json` e va modificata qui. Meglio evitarla: oggi tutte le voci sono `{ "repo": ... }`.
 
 ---
 
