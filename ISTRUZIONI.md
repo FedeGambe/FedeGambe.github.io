@@ -52,7 +52,7 @@ Crea in `docs/img/` tre file con questi nomi esatti:
 | `cover_sfondo.svg` | **solo il fondo** della cover (colore, sfumatura, grafica leggera, grana), senza il soggetto. Su telefono riempie tutta la cover e la card, titolo compreso |
 | `cover_soggetto.svg` | **solo il soggetto** (la B di Bitcoin, l'auto, l'icona di Wally…) su fondo trasparente, con il riquadro stretto attorno al disegno. Su telefono va sotto il titolo |
 
-Sfondo e soggetto sono i due livelli della cover orizzontale: sovrapposti devono ridarla. Si ricavano dalla cover orizzontale con `skill-vetrina/crea-copertina/livelli.py` (e `livelli_bbox.js` per stringere il riquadro del soggetto).
+**Sfondo e soggetto sono la fonte**: `cover_orizzontale.svg` e `cover_verticale.svg` si rigenerano da loro con `python skill-vetrina/crea-copertina/componi.py docs/img` (fondo su tutta la tela, soggetto nella metà bassa). Per spezzare una cover esistente nei due livelli: `livelli.py` e poi `livelli_bbox.js`, che stringe il riquadro del soggetto e ne scrive larghezza e altezza.
 
 Puoi dare dei riferimenti (screenshot, link) e chiedere modifiche finché ti va bene. Ogni copertina deve essere diversa da quelle già fatte.
 
@@ -131,8 +131,10 @@ Poi fai commit e push. GitHub Pages aggiorna il sito in circa un minuto.
 
 ### Come appare sul telefono
 
-- **Card del sito:** sono orizzontali. Il fondo della card è `cover_sfondo.svg`; sopra ci sono, in ordine, titolo, `cover_soggetto.svg`, descrizione e tag. Non ci sono i pulsanti Apri/Codice: tutta la card apre la pagina (`live`, o la repo se `live` è vuoto).
-- **Pagine:** la cover non è a tutto schermo. `cover_sfondo.svg` copre tutta la cover, il titolo sta sul fondo, il soggetto parte sotto il titolo e testo introduttivo e tag si appoggiano alla sua parte bassa su una sfumatura. Niente logo in basso a destra. Serve `<img class="soggetto" src="img/cover_soggetto.svg" alt="">` dentro la `<section class="copertina">`; per i soggetti a tutta larghezza (strisce) aggiungi la classe `largo`. Lo fanno i blocchi `COVER MOBILE` (pagine) e `FONT MOBILE` (dashboard) dei template delle skill. Senza i due livelli la pagina usa la cover orizzontale intera.
+- **Card su desktop:** il fondo è `cover_sfondo.svg`, i testi stanno in alto e `cover_soggetto.svg` occupa la metà bassa.
+- **Card su telefono:** sono orizzontali. Prima il titolo, poi il soggetto; descrizione e tag stanno sopra la parte bassa del soggetto, su una sfumatura. Non ci sono i pulsanti Apri/Codice: tutta la card apre la pagina (`live`, o la repo se `live` è vuoto).
+- **Pagine su desktop:** cover a tutto schermo con `cover_sfondo.svg` come fondo; i testi in alto, il soggetto parte da metà schermo (o dopo i testi, se sono più lunghi).
+- **Pagine su telefono:** la cover non è a tutto schermo. `cover_sfondo.svg` copre tutta la cover; solo il titolo sta prima della grafica, poi il soggetto, con testo introduttivo e tag sopra la sua parte bassa su una sfumatura. Niente logo in basso a destra. Serve `<img class="soggetto" src="img/cover_soggetto.svg" alt="">` dentro la `<section class="copertina">`; per i soggetti a tutta larghezza (strisce) aggiungi la classe `largo`. Lo fanno i blocchi `COVER A DUE LIVELLI` (pagine) e `FONT MOBILE` (dashboard) dei template delle skill. Senza i due livelli la pagina usa la cover orizzontale intera.
 
 ### 6. Verificare
 
