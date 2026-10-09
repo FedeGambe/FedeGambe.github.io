@@ -46,8 +46,8 @@ Crea in `docs/img/` tre file con questi nomi esatti:
 
 | File | Uso |
 |---|---|
-| `cover_orizzontale.svg` | cover della pagina HTML su schermo orizzontale (1600×900) |
-| `cover_verticale.svg` | **immagine della card sul sito**, e cover su mobile (1080×1350) |
+| `cover_orizzontale.svg` | cover della pagina HTML, **e immagine della card e della cover su telefono** (1600×900, grafica nella parte bassa) |
+| `cover_verticale.svg` | **immagine della card sul sito** su desktop (1080×1350) |
 | `favicon.svg` | icona della scheda del browser (64×64, angoli arrotondati) |
 
 Puoi dare dei riferimenti (screenshot, link) e chiedere modifiche finché ti va bene. Ogni copertina deve essere diversa da quelle già fatte.
@@ -125,10 +125,16 @@ In `progetti.json` aggiungi una voce con il solo nome della repo:
 
 Poi fai commit e push. GitHub Pages aggiorna il sito in circa un minuto.
 
+### Come appare sul telefono
+
+- **Card del sito:** sono orizzontali (4:3) e usano `cover_orizzontale.svg`. Il titolo sta in alto sul fondo pieno, descrizione e tag in basso su una sfumatura. Non ci sono i pulsanti Apri/Codice: tutta la card apre la pagina (`live`, o la repo se `live` è vuoto). Se manca `cover_orizzontale.svg` la card resta senza immagine.
+- **Pagine:** la cover non è a tutto schermo. Prima il titolo sul fondo pieno, poi la cover orizzontale con sopra il testo introduttivo e i tag su una sfumatura, senza logo in basso a destra. Lo fanno i blocchi `COVER MOBILE` (pagine) e `FONT MOBILE` (dashboard) dei template delle skill.
+
 ### 6. Verificare
 
 - Apri https://progetti.federicogamberini.it e ricarica con **Cmd+Shift+R**.
 - Controlla la nuova card: immagine, titolo, tag, e che il pulsante "Apri" porti alla pagina giusta.
+- Prova anche su telefono (o con la finestra stretta): card orizzontale con la cover orizzontale, e un tocco sulla card apre la pagina.
 - Le schede si leggono da `raw.githubusercontent.com`, che tiene in cache i file **fino a 5 minuti**. Se hai appena cambiato `progetto.json`, aspetta un attimo.
 
 ---
