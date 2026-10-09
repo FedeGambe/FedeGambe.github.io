@@ -49,6 +49,10 @@ Crea in `docs/img/` tre file con questi nomi esatti:
 | `cover_orizzontale.svg` | cover della pagina HTML, **e immagine della card e della cover su telefono** (1600×900, grafica nella parte bassa) |
 | `cover_verticale.svg` | **immagine della card sul sito** su desktop (1080×1350) |
 | `favicon.svg` | icona della scheda del browser (64×64, angoli arrotondati) |
+| `cover_sfondo.svg` | **solo il fondo** della cover (colore, sfumatura, grafica leggera, grana), senza il soggetto. Su telefono riempie tutta la cover e la card, titolo compreso |
+| `cover_soggetto.svg` | **solo il soggetto** (la B di Bitcoin, l'auto, l'icona di Wally…) su fondo trasparente, con il riquadro stretto attorno al disegno. Su telefono va sotto il titolo |
+
+Sfondo e soggetto sono i due livelli della cover orizzontale: sovrapposti devono ridarla. Si ricavano dalla cover orizzontale con `skill-vetrina/crea-copertina/livelli.py` (e `livelli_bbox.js` per stringere il riquadro del soggetto).
 
 Puoi dare dei riferimenti (screenshot, link) e chiedere modifiche finché ti va bene. Ogni copertina deve essere diversa da quelle già fatte.
 
@@ -127,8 +131,8 @@ Poi fai commit e push. GitHub Pages aggiorna il sito in circa un minuto.
 
 ### Come appare sul telefono
 
-- **Card del sito:** sono orizzontali (4:3) e usano `cover_orizzontale.svg`. Il titolo sta in alto sul fondo pieno, descrizione e tag in basso su una sfumatura. Non ci sono i pulsanti Apri/Codice: tutta la card apre la pagina (`live`, o la repo se `live` è vuoto). Se manca `cover_orizzontale.svg` la card resta senza immagine.
-- **Pagine:** la cover non è a tutto schermo. Prima il titolo sul fondo pieno, poi la cover orizzontale con sopra il testo introduttivo e i tag su una sfumatura, senza logo in basso a destra. Lo fanno i blocchi `COVER MOBILE` (pagine) e `FONT MOBILE` (dashboard) dei template delle skill.
+- **Card del sito:** sono orizzontali. Il fondo della card è `cover_sfondo.svg`; sopra ci sono, in ordine, titolo, `cover_soggetto.svg`, descrizione e tag. Non ci sono i pulsanti Apri/Codice: tutta la card apre la pagina (`live`, o la repo se `live` è vuoto).
+- **Pagine:** la cover non è a tutto schermo. `cover_sfondo.svg` copre tutta la cover, il titolo sta sul fondo, il soggetto parte sotto il titolo e testo introduttivo e tag si appoggiano alla sua parte bassa su una sfumatura. Niente logo in basso a destra. Serve `<img class="soggetto" src="img/cover_soggetto.svg" alt="">` dentro la `<section class="copertina">`; per i soggetti a tutta larghezza (strisce) aggiungi la classe `largo`. Lo fanno i blocchi `COVER MOBILE` (pagine) e `FONT MOBILE` (dashboard) dei template delle skill. Senza i due livelli la pagina usa la cover orizzontale intera.
 
 ### 6. Verificare
 
@@ -145,7 +149,7 @@ Poi fai commit e push. GitHub Pages aggiorna il sito in circa un minuto.
 |---|---|---|
 | titolo, descrizione, tag, anno della card | `docs/progetto.json` | progetto |
 | link del pulsante "Apri" | `live` in `docs/progetto.json` | progetto |
-| immagine della card | `docs/img/cover_verticale.svg` | progetto |
+| immagine della card | `docs/img/cover_verticale.svg` (desktop), `cover_sfondo.svg` + `cover_soggetto.svg` (telefono) | progetto |
 | contenuto della pagina del progetto | `docs/index.html` / `docs/dashboard.html` | progetto |
 | aggiungere, togliere o riordinare le card | `progetti.json` | questa |
 | testo nero su cover chiara | lista `LIGHT` in `index.html` | questa |
