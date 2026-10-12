@@ -68,7 +68,7 @@ header.top button:hover{background:var(--ink);color:var(--bg)}
 .card:focus-within::after{opacity:.72}
 .links a{min-width:110px;text-align:center;padding:12px 18px;border:1.5px solid #fff;font:700 .8rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;border-radius:4px}
 .links a.main{background:#fff;color:#14161f}
-.links a:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.links a:hover{background:var(--col,var(--acc));border-color:var(--col,var(--acc));color:#fff}
 @media(hover:none){.links{opacity:1;inset:auto 0 70px 0}.card::after{display:none}}
 .empty{padding:60px 0;text-align:center;color:var(--mute);display:none}
 footer{border-top:3px solid var(--ink);padding:28px 0 48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:600 .8rem/1 ui-monospace,Consolas,monospace;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
@@ -164,7 +164,7 @@ let tags,tag=null;
 function render(){
 tags=[...new Set(P.flatMap(p=>p.tags))].sort();
 grid.innerHTML=P.map((p,i)=>`
- <article class="card${LIGHT.includes(p.repo)?" light":""}" style="animation-delay:${i*80}ms;--sfondo:url(${p.img.replace('cover_verticale','cover_sfondo')})" data-s="${(p.t+" "+p.d+" "+p.tags.join(" ")).toLowerCase()}" data-t="${p.tags.join("|")}">
+ <article class="card${LIGHT.includes(p.repo)?" light":""}" style="animation-delay:${i*80}ms;${p.colore?`--col:${p.colore};`:""}--sfondo:url(${p.img.replace('cover_verticale','cover_sfondo')})" data-s="${(p.t+" "+p.d+" "+p.tags.join(" ")).toLowerCase()}" data-t="${p.tags.join("|")}">
   <img class="cover" src="${p.img}" alt="" loading="lazy">
   ${p.img.endsWith("cover_verticale.svg")?`<img class="soggetto" onload="this.classList.toggle('largo',this.naturalWidth/this.naturalHeight>2.6)" src="${p.img.replace("cover_verticale","cover_soggetto")}" alt="" loading="lazy">`:""}
   <a class="vai" href="${p.live||"https://github.com/FedeGambe/"+p.repo}" aria-label="${p.t}"></a>
