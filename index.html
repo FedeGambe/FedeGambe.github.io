@@ -173,7 +173,7 @@ grid.innerHTML=P.map((p,i)=>`
    <h2>${p.t}</h2><p>${p.d}</p>
    </div>
    <div class="foot"><div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div></div>
-   <div class="links">${p.live?`<a class="main" href="${p.live}">Apri →</a>`:""}<a class="${p.live?"":"main"}" href="https://github.com/FedeGambe/${p.repo}">Codice</a></div>
+   <div class="links">${p.live?`<a class="main" href="${p.live}">Apri →</a>`:""}${p.codice===false?"":`<a class="${p.live?"":"main"}" href="https://github.com/FedeGambe/${p.repo}">Codice</a>`}</div>
  </article>`).join("");
 
 chips.innerHTML=["Tutti",...tags].map((t,i)=>`<button class="chip" aria-pressed="${i==0}" data-t="${i?t:""}">${t}</button>`).join("");

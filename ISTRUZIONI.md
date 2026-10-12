@@ -78,6 +78,7 @@ Di solito parte da sola insieme alle altre skill. Crea `docs/progetto.json`:
 - `repo`: nome **esatto** della repo su GitHub. Maiuscole comprese: `/When_to_buy_iPhone/` funziona, `/when-to-buy-iphone/` dà 404.
 - `tags`: da 2 a 4, con l'iniziale maiuscola. Diventano anche i filtri del sito.
 - `live`: il link del pulsante "Apri". Resta `""` finché non c'è una pagina HTML. Vale `/Nome_Repo/` per `docs/index.html` e `/Nome_Repo/dashboard.html` per una dashboard. Per un sito esterno usa l'URL completo (es. Wally: `https://wally.federicogamberini.it/`).
+- `codice` (facoltativo): metti `false` per togliere il pulsante "Codice" dalla card (es. `simulatori`). Se manca, il pulsante c'è.
 - `img`: sempre `img/cover_verticale.svg`.
 
 ### 3. Pagina o dashboard HTML
@@ -152,6 +153,7 @@ Poi fai commit e push. GitHub Pages aggiorna il sito in circa un minuto.
 |---|---|---|
 | titolo, descrizione, tag, anno della card | `docs/progetto.json` | progetto |
 | link del pulsante "Apri" | `live` in `docs/progetto.json` | progetto |
+| nascondere il pulsante "Codice" | `"codice": false` in `docs/progetto.json` | progetto |
 | immagine della card | `docs/img/cover_verticale.svg` (desktop), `cover_sfondo.svg` + `cover_soggetto.svg` (telefono) | progetto |
 | contenuto della pagina del progetto | `docs/index.html` / `docs/dashboard.html` | progetto |
 | aggiungere, togliere o riordinare le card | `progetti.json` | questa |
