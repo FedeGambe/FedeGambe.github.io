@@ -1,14 +1,14 @@
 # Come aggiungere un progetto al sito
 
-Il sito [progetti.federicogamberini.it](https://progetti.federicogamberini.it) mostra una card per ogni voce di `progetti.json`.
+Il sito [progetti.federicogamberini.it](https://progetti.federicogamberini.it) mostra una card per ogni voce di `progetti.json`, divise in tre gruppi: **Strumenti** (da usare), **Analisi** (da leggere), **Studio** (tesi e ricerca).
 Ogni card legge i suoi dati direttamente dalla repo del progetto:
 
 ```
-FedeGambe.github.io/progetti.json        →  { "repo": "Nome_Repo" }
+FedeGambe.github.io/progetti.json        →  { "repo": "Nome_Repo", "tipo": "analisi", "formato": "Pagina" }
                                               │
                                               ▼
 Nome_Repo/docs/progetto.json             →  titolo, descrizione, tag, anno, link "Apri"
-Nome_Repo/docs/img/cover_verticale.svg   →  immagine della card
+Nome_Repo/docs/img/cover_sfondo.svg + cover_soggetto.svg  →  immagine della card
 Nome_Repo/docs/index.html                →  pagina pubblicata su /Nome_Repo/
 ```
 
@@ -47,7 +47,7 @@ Crea in `docs/img/` tre file con questi nomi esatti:
 | File | Uso |
 |---|---|
 | `cover_orizzontale.svg` | cover della pagina HTML, **e immagine della card e della cover su telefono** (1600×900, grafica nella parte bassa) |
-| `cover_verticale.svg` | **immagine della card sul sito** su desktop (1080×1350) |
+| `cover_verticale.svg` | formato verticale per i social (1080×1350); il sito non la usa più |
 | `favicon.svg` | icona della scheda del browser (64×64, angoli arrotondati) |
 | `cover_sfondo.svg` | **solo il fondo** della cover (colore, sfumatura, grafica leggera, grana), senza il soggetto. Su telefono riempie tutta la cover e la card, titolo compreso |
 | `cover_soggetto.svg` | **solo il soggetto** (la B di Bitcoin, l'auto, l'icona di Wally…) su fondo trasparente, con il riquadro stretto attorno al disegno. Su telefono va sotto il titolo |
@@ -76,9 +76,9 @@ Di solito parte da sola insieme alle altre skill. Crea `docs/progetto.json`:
 ```
 
 - `repo`: nome **esatto** della repo su GitHub. Maiuscole comprese: `/When_to_buy_iPhone/` funziona, `/when-to-buy-iphone/` dà 404.
-- `tags`: da 2 a 4, con l'iniziale maiuscola. Diventano anche i filtri del sito.
+- `tags`: da 2 a 4, con l'iniziale maiuscola. Sulla card se ne vedono al massimo 3 (solo su desktop) e servono alla ricerca.
 - `live`: il link del pulsante "Apri". Resta `""` finché non c'è una pagina HTML. Vale `/Nome_Repo/` per `docs/index.html` e `/Nome_Repo/dashboard.html` per una dashboard. Per un sito esterno usa l'URL completo (es. Wally: `https://wally.federicogamberini.it/`).
-- `colore` (facoltativo): il colore del progetto, in esadecimale (es. `"#2f6b52"`). Colora i pulsanti della card al passaggio del mouse; se manca si usa l'arancio del sito. Prendilo dalla copertina e che non sia troppo scuro: sta sopra un velo nero.
+- `colore` (facoltativo): il colore del progetto, in esadecimale (es. `"#2f6b52"`). Colora l'etichetta del formato e il bordo della card al passaggio del mouse; se manca si usa l'arancio del sito. Prendilo dalla copertina e che non sia troppo scuro: sta sopra un velo nero.
 - `codice` (facoltativo): metti `false` per togliere il pulsante "Codice" dalla card (es. `simulatori`). Se manca, il pulsante c'è.
 - `img`: sempre `img/cover_verticale.svg`.
 
@@ -115,35 +115,37 @@ gh repo edit FedeGambe/Nome_Repo \
 
 ### 5. Aggiungere la card al sito (questa repo)
 
-In `progetti.json` aggiungi una voce con il solo nome della repo:
+In `progetti.json` aggiungi una voce con il nome della repo, il gruppo e cosa si apre:
 
 ```json
 [
-    { "repo": "Master_s_thesis_Data_science", "t": "...", "...": "..." },
-    { "repo": "Wally" },
-    { "repo": "Nome_Repo" }
+    { "repo": "simulatori", "tipo": "strumento", "formato": "Dashboard" },
+    { "repo": "Wally", "tipo": "strumento", "formato": "App" },
+    { "repo": "Nome_Repo", "tipo": "analisi", "formato": "Pagina" }
 ]
 ```
 
-- L'ordine nel file è l'ordine delle card. La prima è "N° 01".
+- `tipo`: `strumento` (dashboard, simulatori, app: si usano), `analisi` (pagine da leggere) o `studio` (tesi). Se manca vale `analisi`.
+- `formato`: cosa si apre cliccando, scritto sopra il titolo della card (`Pagina`, `Dashboard`, `App`, `Pagina + dashboard`). Se manca vale `Pagina`.
+- L'ordine nel file è l'ordine delle card dentro ogni gruppo.
 - **Attenzione alle virgole.** Va una virgola tra una voce e l'altra, mai dopo l'ultima. Una virgola di troppo rompe tutto il file, e il sito mostra "Impossibile caricare i progetti".
   Per controllare: `python3 -m json.tool progetti.json`, che non deve dare errori.
-- Se la cover è chiara (fondo chiaro), aggiungi il nome della repo alla lista `LIGHT` in `index.html`. Così il testo della card diventa nero.
 
 Poi fai commit e push. GitHub Pages aggiorna il sito in circa un minuto.
 
 ### Come appare sul telefono
 
-- **Card su desktop:** il fondo è `cover_sfondo.svg`, i testi stanno in alto e `cover_soggetto.svg` occupa la metà bassa.
-- **Card su telefono:** sono orizzontali. Prima il titolo, poi il soggetto; descrizione e tag stanno sopra la parte bassa del soggetto, su una sfumatura. Non ci sono i pulsanti Apri/Codice: tutta la card apre la pagina (`live`, o la repo se `live` è vuoto).
+- **Card su desktop:** `cover_sfondo.svg` fa da fondo a tutta la card, `cover_soggetto.svg` sta in alto (16:9); sotto, in bianco su un velo scuro, formato e anno, titolo, descrizione su 2 righe, tag e pulsante Codice. Tutta la card apre la pagina (`live`, o la repo se `live` è vuoto).
+- **Card su telefono:** in riga, soggetto a sinistra e testo a destra, sullo stesso fondo; niente tag.
+- **Cover chiara** (es. la tesi, fondo beige): aggiungi `"chiara": true` alla sua voce in `progetti.json`, così il testo della card diventa scuro.
 - **Pagine su desktop:** cover a tutto schermo con `cover_sfondo.svg` come fondo; i testi in alto, il soggetto parte da metà schermo (o dopo i testi, se sono più lunghi).
 - **Pagine su telefono:** la cover non è a tutto schermo. `cover_sfondo.svg` copre tutta la cover; solo il titolo sta prima della grafica, poi il soggetto, con testo introduttivo e tag sopra la sua parte bassa su una sfumatura. Niente logo in basso a destra. Serve `<img class="soggetto" src="img/cover_soggetto.svg" alt="">` dentro la `<section class="copertina">`; per i soggetti a tutta larghezza (strisce) aggiungi la classe `largo`. Lo fanno i blocchi `COVER A DUE LIVELLI` (pagine) e `FONT MOBILE` (dashboard) dei template delle skill. Senza i due livelli la pagina usa la cover orizzontale intera.
 
 ### 6. Verificare
 
 - Apri https://progetti.federicogamberini.it e ricarica con **Cmd+Shift+R**.
-- Controlla la nuova card: immagine, titolo, tag, e che il pulsante "Apri" porti alla pagina giusta.
-- Prova anche su telefono (o con la finestra stretta): card orizzontale con la cover orizzontale, e un tocco sulla card apre la pagina.
+- Controlla la nuova card: gruppo giusto, immagine, titolo, formato, e che il clic sulla card porti alla pagina giusta.
+- Prova anche su telefono (o con la finestra stretta): card in riga con la miniatura, e un tocco sulla card apre la pagina.
 - Le schede si leggono da `raw.githubusercontent.com`, che tiene in cache i file **fino a 5 minuti**. Se hai appena cambiato `progetto.json`, aspetta un attimo.
 
 ---
@@ -153,13 +155,14 @@ Poi fai commit e push. GitHub Pages aggiorna il sito in circa un minuto.
 | Voglio cambiare… | File da modificare | Repo |
 |---|---|---|
 | titolo, descrizione, tag, anno della card | `docs/progetto.json` | progetto |
-| link del pulsante "Apri" | `live` in `docs/progetto.json` | progetto |
-| colore dei pulsanti al passaggio del mouse | `colore` in `docs/progetto.json` | progetto |
+| link della card | `live` in `docs/progetto.json` | progetto |
+| colore del formato e del bordo al passaggio del mouse | `colore` in `docs/progetto.json` | progetto |
 | nascondere il pulsante "Codice" | `"codice": false` in `docs/progetto.json` | progetto |
-| immagine della card | `docs/img/cover_verticale.svg` (desktop), `cover_sfondo.svg` + `cover_soggetto.svg` (telefono) | progetto |
+| immagine della card | `docs/img/cover_sfondo.svg` + `cover_soggetto.svg` | progetto |
 | contenuto della pagina del progetto | `docs/index.html` / `docs/dashboard.html` | progetto |
 | aggiungere, togliere o riordinare le card | `progetti.json` | questa |
-| testo nero su cover chiara | lista `LIGHT` in `index.html` | questa |
+| gruppo della card e cosa si apre | `tipo` e `formato` in `progetti.json` | questa |
+| testo scuro su cover chiara | `"chiara": true` in `progetti.json` | questa |
 | grafica, testi o struttura del sito | `index.html` | questa |
 | descrizione, tag e link della repo su GitHub | `gh repo edit` (o la rotella ⚙ di *About*) | progetto |
 

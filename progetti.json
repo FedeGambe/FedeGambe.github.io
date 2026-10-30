@@ -1,23 +1,38 @@
 [
     {
-        "repo": "Master_s_thesis_Data_science"
+        "repo": "simulatori",
+        "tipo": "strumento",
+        "formato": "Dashboard"
     },
     {
-        "repo": "Wally"
+        "repo": "Vehicle_Price_Monitor",
+        "tipo": "strumento",
+        "formato": "Dashboard"
     },
     {
-        "repo": "When_to_buy_iPhone"
+        "repo": "Wally",
+        "tipo": "strumento",
+        "formato": "App"
     },
     {
-        "repo": "Target_Maturity_ETF_Planner"
+        "repo": "Target_Maturity_ETF_Planner",
+        "tipo": "analisi",
+        "formato": "Pagina"
     },
     {
-        "repo": "Vehicle_Price_Monitor"
+        "repo": "When_to_buy_iPhone",
+        "tipo": "analisi",
+        "formato": "Pagina"
     },
     {
-        "repo": "Bitcoin_Prediction"
+        "repo": "Bitcoin_Prediction",
+        "tipo": "analisi",
+        "formato": "Pagina"
     },
     {
-        "repo": "simulatori"
+        "repo": "Master_s_thesis_Data_science",
+        "tipo": "studio",
+        "formato": "Pagina + dashboard",
+        "chiara": true
     }
 ]

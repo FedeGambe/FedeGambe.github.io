@@ -8,7 +8,7 @@
 <meta name="description" content="Data science, analisi predittiva e strumenti di scraping: i progetti di Federico Gamberini.">
 <style>
 :root{
-  --g1:#ffffff;--g2:#f6e9d9;--g3:#fbfaf7;--bg:#fbfaf7;--ink:#1c1b19;--mute:#6b665c;--card:#ffffff;--line:#e6e0d4;--acc:#d9482b;--acc2:#1f4e5f;
+  --g1:#ffffff;--g2:#f6e9d9;--g3:#fbfaf7;--bg:#fbfaf7;--ink:#34312c;--mute:#7a7468;--card:#ffffff;--line:#e8e2d7;--acc:#d9482b;--acc2:#1f4e5f;
   --shadow:0 1px 0 var(--line),0 12px 30px -18px rgba(28,27,25,.35);
 }
 :root[data-theme=dark]{
@@ -30,95 +30,84 @@ header.top.scrolled img{transform:rotate(360deg) scale(.9)}
 header.top .wrap{max-width:none;height:60px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;font:600 .8rem/1 ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
 header.top button{background:none;border:1px solid var(--ink);color:var(--ink);padding:8px 12px;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;border-radius:999px}
 header.top button:hover{background:var(--ink);color:var(--bg)}
-.hero{padding:56px 0 40px;border-bottom:3px solid var(--ink);position:relative}
+.hero{padding:56px 0 40px;border-bottom:2px solid var(--ink);position:relative}
 .hero h1{font:800 clamp(2.4rem,7.5vw,5.6rem)/.95 Georgia,"Times New Roman",serif;letter-spacing:-.04em;margin:0}
 .hero h1 em{color:var(--acc);font-style:italic}
 .hero p{color:var(--mute);font-size:1.1rem;margin:24px 0 0}
-.stats{display:flex;gap:36px;margin-top:32px;font:600 .8rem/1.3 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
-.stats b{display:block;font:800 2.4rem/1 Georgia,serif;color:var(--ink);letter-spacing:-.02em}
-.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:28px 0 8px;}
-.tools input{flex:1 1 220px;padding:12px 16px;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);font:inherit;border-radius:999px;outline:none}
-.tools input:focus{box-shadow:0 0 0 3px var(--acc)}
-.chip{border:1.5px solid var(--line);background:transparent;color:var(--ink);padding:8px 14px;border-radius:999px;font:600 .8rem/1 ui-monospace,Consolas,monospace;cursor:pointer}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem)}
+/* Filtri: tipo di progetto + ricerca */
+.tools{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;padding:24px 0 4px}
+.tools input{flex:1 1 220px;padding:10px 16px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;border-radius:999px;outline:none}
+.tools input:focus{border-color:var(--ink)}
+.chip{border:1.5px solid var(--line);background:transparent;color:var(--ink);padding:9px 14px;border-radius:999px;font:600 .8rem/1 ui-monospace,Consolas,monospace;letter-spacing:.04em;cursor:pointer}
 .chip:hover{border-color:var(--ink)}
-.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;padding:20px 0 64px}
-.card{position:relative;aspect-ratio:5/7;min-width:0;color:#fff;background:#14161f;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;box-shadow:0 18px 40px -22px #000a;
-  transition:transform .25s,box-shadow .25s;opacity:0;transform:translateY(16px);animation:in .6s forwards}
-.card:hover{transform:translateY(-6px)}
-@keyframes in{to{opacity:1;transform:none}}
+.chip[aria-pressed=true]{background:#efe9df;color:var(--ink);border-color:#d9d0c1}
+:root[data-theme=dark] .chip[aria-pressed=true]{background:#2a2722;border-color:#4a453c}
+.chip small{font:inherit;opacity:.55;margin-left:6px}
+/* Gruppi per tipo */
+.gruppo{padding-top:36px}
+.gruppo[hidden]{display:none}
+.gruppo>header{display:flex;align-items:baseline;gap:14px;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--line)}
+.gruppo h2{font:700 1.6rem/1.1 Georgia,"Times New Roman",serif;letter-spacing:-.02em;margin:0}
+.gruppo>header span{font:600 .72rem/1.3 ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.gruppo>.descr{margin:0 0 22px;color:var(--mute);font-size:.98rem;line-height:1.55}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+/* Card: cover orizzontale sopra, testo sotto; tutta la card apre il progetto */
+.card{position:relative;display:flex;flex-direction:column;min-width:0;color:#fff;background:#14161f var(--sfondo,none) 50% 100%/cover no-repeat;border-radius:8px;overflow:hidden;
+  box-shadow:0 10px 24px -20px #0007;transition:transform .25s,box-shadow .25s}
+.card:hover,.card:focus-within{transform:translateY(-4px);box-shadow:0 18px 34px -22px #0009}
 .card[hidden]{display:none}
-.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;transition:transform .6s}
-.card:hover .cover{transform:scale(1.04)}
-.body{position:relative;z-index:1;padding:20px 20px 0;display:flex;flex-direction:column;gap:10px}
-.meta{display:flex;justify-content:space-between;font:600 .72rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.07em;color:#ffffffbb}
-.card.light .body,.card.light .meta,.card.light p{color:#111;transition:color .3s}
-.card.light:hover .body,.card.light:hover .meta,.card.light:hover p,.card.light:focus-within .body,.card.light:focus-within .meta,.card.light:focus-within p{color:#fff}
-.card h2{font:700 1.6rem/1.1 Georgia,serif;margin:0;letter-spacing:-.01em}
-.card p{margin:0;color:#ffffffd9;font-size:.92rem}
-.foot{z-index:1;position:absolute;left:0;right:0;bottom:0;padding:48px 20px 18px;background:linear-gradient(transparent,#000d)}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tags span{font:600 .7rem/1 ui-monospace,Consolas,monospace;border:1px solid #ffffff55;padding:5px 8px;border-radius:999px;color:#fffd}
-.card::after{content:"";position:absolute;inset:0;background:#000;opacity:0;transition:opacity .3s;pointer-events:none}
-.links{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;gap:12px;opacity:0;transition:opacity .3s}
-.card:hover::after{opacity:.72}
-.card:hover .links,.card:focus-within .links{opacity:1}
-.card:focus-within::after{opacity:.72}
-.links a{min-width:110px;text-align:center;padding:12px 18px;border:1.5px solid #fff;font:700 .8rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;border-radius:4px}
-.links a.main{background:#fff;color:#14161f}
-.links a:hover{background:var(--col,var(--acc));border-color:var(--col,var(--acc));color:#fff}
-@media(hover:none){.links{opacity:1;inset:auto 0 70px 0}.card::after{display:none}}
+/* in alto il soggetto della cover (cover_soggetto.svg), sul fondo che continua sotto il testo */
+.card .media{aspect-ratio:16/9;min-height:0;overflow:hidden;padding:30px 56px 8px;display:flex}
+.card .soggetto{width:100%;height:100%;min-height:0;min-width:0;object-fit:contain;object-position:50% 100%;transition:transform .6s}
+.card .media:has(.largo){padding:0}
+.card .soggetto.largo{object-fit:cover}  /* strisce a tutta larghezza */
+/* cover chiara ("chiara": true in progetti.json): testo scuro, niente velo */
+.card.chiara{color:#111}
+.card.chiara .testo{background:none}
+.card.chiara .meta,.card.chiara .tags{color:#111111a6}
+.card.chiara .meta b{color:#111}
+.card.chiara p{color:#111111d0}
+.card.chiara .codice{color:#111;border-color:#11111166}
+.card.chiara .codice:hover{background:#111;color:#fff;border-color:#111}
+.card:hover .soggetto{transform:scale(1.04)}
+.card .testo{display:flex;flex-direction:column;gap:8px;padding:16px 18px 18px;flex:1;min-width:0;background:linear-gradient(#0000,#00000052)}
+.meta{display:flex;justify-content:space-between;gap:12px;font:600 .7rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;color:#ffffffb3}
+.meta b{color:#fff;font-weight:700}
+.card h3{font:700 1.3rem/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.01em;margin:2px 0 0}
+.card h3 a::after{content:"";position:absolute;inset:0;z-index:1}  /* tutta la card cliccabile */
+.card h3 a:focus-visible{outline:none}
+.card:has(h3 a:focus-visible){outline:2px solid var(--ink);outline-offset:3px}
+.card p{margin:0;color:#ffffffd9;font-size:.92rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .piede{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:8px}
+.tags{font:600 .68rem/1.3 ui-monospace,Consolas,monospace;color:#ffffffa6}
+.codice{position:relative;z-index:2;flex:none;font:600 .7rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.06em;color:#fff;
+  border:1px solid #ffffff73;border-radius:999px;padding:6px 10px}
+.codice:hover{background:#fff;color:#14161f;border-color:#fff}
 .empty{padding:60px 0;text-align:center;color:var(--mute);display:none}
-footer{border-top:3px solid var(--ink);padding:28px 0 48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:600 .8rem/1 ui-monospace,Consolas,monospace;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+footer{margin-top:64px;border-top:2px solid var(--ink);padding:28px 0 48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:600 .8rem/1 ui-monospace,Consolas,monospace;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
 footer a:hover{color:var(--acc)}
-.card .soggetto{display:none}
-.card:has(.soggetto){background:#14161f var(--sfondo,none) 50% 100%/cover no-repeat}
-.card:has(.soggetto) .cover{display:none}
-.vai{display:none}
-/* Cover a due livelli (docs/img/cover_sfondo.svg come fondo della card, cover_soggetto.svg come soggetto).
-   Desktop: testi in alto, il soggetto occupa la metà bassa della card. */
-@media(min-width:701px){
-  .card .soggetto{display:block;position:absolute;left:0;right:0;top:50%;bottom:0;width:100%;height:50%;box-sizing:border-box;padding:0 20px 64px;
-    object-fit:contain;object-position:50% 0;transition:transform .6s}  /* parte da metà card, con margine in basso (sopra i tag) */
-  .card .soggetto.largo{object-fit:cover;object-position:50% 100%;padding:0}
-  .card:hover .soggetto{transform:scale(1.04)}
-}
-/* Telefono: card orizzontali; titolo, poi il soggetto, con descrizione e tag sopra la sua parte bassa su una sfumatura;
-   niente pulsanti: tutta la card apre la pagina */
+/* Telefono: card in riga, miniatura a sinistra */
 @media(max-width:700px){
-  header.top .wrap{padding:16px 20px;font-size:.7rem;letter-spacing:.06em}
+  header.top .wrap{font-size:.7rem;letter-spacing:.06em}
   header.top .wrap>span{white-space:nowrap}
   header.top button{white-space:nowrap;padding:7px 10px}
   .hero{padding:36px 0 28px}
-  .hero h1{font-size:clamp(2.2rem,10vw,2.8rem)}
   .hero p{font-size:1rem;margin-top:16px}
-  .stats{gap:28px;margin-top:24px}
-  .stats b{font-size:1.7rem}
-  .grid{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:12px}
-  .card{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto;aspect-ratio:auto;height:auto;--velo:#000000b3}
-  .card.light{--velo:#fffaeb99}
-  .card:hover{transform:none}
-  .card .body{display:contents}
-  .card .meta{grid-row:1;position:relative;z-index:1;padding:16px 16px 0}
-  .card h2{grid-row:2;position:relative;z-index:1;padding:8px 16px 0;font-size:1.35rem}
-  .card .soggetto{grid-row:3;display:block;width:100%;height:160px;box-sizing:border-box;margin-top:12px;padding-bottom:18px;object-fit:contain;object-position:50% 0}
-  .card .soggetto.largo{object-fit:cover;object-position:50% 100%;padding-bottom:0}
-  .card:has(.soggetto.largo){grid-template-rows:auto auto 106px auto auto}  /* strisce a tutta larghezza: fino al bordo inferiore della card */
-  .card .soggetto.largo{grid-row:3/6;grid-column:1;height:100%;min-height:150px;align-self:stretch}
-  .card:has(.soggetto.largo) p{margin-top:0}
-  .card .meta,.card h2,.card .soggetto,.card p,.foot{grid-column:1}
-  .card p{grid-row:4;position:relative;z-index:1;margin-top:-56px;padding:40px 16px 0;font-size:.88rem;line-height:1.45;
-    background:linear-gradient(transparent,var(--velo) 40px);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .card:not(:has(.soggetto)) p{margin-top:0;padding-top:12px;background:none}
-  .foot{grid-row:5;position:relative;z-index:1;padding:10px 16px 16px;background:var(--velo)}
-  .card:not(:has(.soggetto)) .foot{background:none}
-  .foot .tags{flex-wrap:nowrap;overflow:hidden;mask-image:linear-gradient(90deg,#000 85%,transparent)}
-  .foot .tags span{flex:none;white-space:nowrap}
-  .card.light .tags span{color:#111;border-color:#11111166}
-  .card::after,.links{display:none}
-  .vai{display:block;position:absolute;inset:0;z-index:3}
+  .gruppo{padding-top:28px}
+  .gruppo h2{font-size:1.35rem}
+  .grid{grid-template-columns:minmax(0,1fr);gap:12px}
+  .card{flex-direction:row}
+  .card:hover,.card:focus-within{transform:none}
+  .card .media{width:112px;aspect-ratio:auto;flex:none;padding:14px 0 14px 12px}
+  .card .media:has(.largo){padding:0}
+  .card .testo{padding:12px 14px;gap:6px;background:linear-gradient(90deg,#0000,#00000038)}
+  .card h3{font-size:1.1rem}
+  .card p{font-size:.86rem}
+  .card .piede{padding-top:4px}
+  .tags{display:none}
 }
-@media(prefers-reduced-motion:reduce){.card{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}html{scroll-behavior:auto}}
 </style>
 <!-- tema: chiaro di default, scuro col pulsante (salvato, vale per tutte le pagine del sito) -->
 <script>try{document.documentElement.dataset.theme=localStorage.theme||"light"}catch{document.documentElement.dataset.theme="light"}</script>
@@ -127,24 +116,17 @@ footer a:hover{color:var(--acc)}
 <header class="top"><div class="wrap"><span style="display:flex;align-items:center;gap:10px"><img src="g-icon.svg" alt="" width="22" height="22">Federico Gamberini / Archivio</span>
     <button id="theme" aria-label="Cambia tema">Tema</button></div></header>
 <div class="wrap">
-  
-
   <section class="hero">
     <h1>Progetti,<br><em>dati e modelli</em></h1>
-    <p>Analisi statistica, machine learning e strumenti di scraping. Un archivio dei progetti su cui sto lavorando o che ho concluso.</p>
-    <div class="stats">
-      <div><b id="n-all">0</b>progetti</div>
-      <div><b id="n-live">0</b>online</div>
-      <div><b id="n-tags">0</b>temi</div>
-    </div>
+    <p>Strumenti da usare, analisi da leggere e la tesi: statistica, machine learning e scraping.</p>
   </section>
 
   <div class="tools">
+    <div id="chips" style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="Tipo di progetto"></div>
     <input id="q" type="search" placeholder="Cerca un progetto, una tecnica…" aria-label="Cerca">
-    <div id="chips" style="display:flex;flex-wrap:wrap;gap:8px"></div>
   </div>
 
-  <main class="grid" id="grid"></main>
+  <main id="gruppi"></main>
   <p class="empty" id="empty">Nessun progetto corrisponde alla ricerca.</p>
 
   <footer>
@@ -154,51 +136,57 @@ footer a:hover{color:var(--acc)}
 </div>
 
 <script>
-// progetti.json: voci complete, oppure solo {"repo"}: la scheda si legge da <repo>/docs/progetto.json (cover in docs/img/)
-let P=[];
-const LIGHT=["Master_s_thesis_Data_science"]; // cover chiare: testo nero (progetti.json è generato, non ci metto flag)
+// progetti.json: ordine dei progetti e, per ognuno, "tipo" (gruppo della pagina) e "formato" (cosa si apre).
+// Il resto della scheda si legge da <repo>/docs/progetto.json (cover in docs/img/); i campi di progetti.json vincono.
+const GRUPPI=[
+  {k:"strumento",t:"Strumenti",s:"da usare",d:"Dashboard, simulatori e app: imposti i tuoi parametri e il risultato si aggiorna subito, con grafici che spiegano il perché."},
+  {k:"analisi",t:"Analisi",s:"da leggere",d:"Pagine di analisi su dati raccolti con lo scraping e su modelli predittivi: grafici interattivi, filtri e conclusioni, capitolo per capitolo."},
+  {k:"studio",t:"Studio",s:"tesi e ricerca",d:"La tesi magistrale sull'adozione dei veicoli elettrici: analisi statistiche, cluster e modelli di machine learning, con una dashboard per provare il modello."},
+];
+let P=[],tipo=null;
+const $=s=>document.querySelector(s),chips=$("#chips");
+const esc=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
 
-const $=s=>document.querySelector(s),grid=$("#grid"),chips=$("#chips");
-let tags,tag=null;
+const card=p=>{
+  const href=p.live||"https://github.com/FedeGambe/"+p.repo;
+  const img=n=>esc(p.img.replace("cover_verticale",n));
+  return `<article class="card${p.chiara?" chiara":""}" style="--sfondo:url('${img("cover_sfondo")}')" data-s="${esc((p.t+" "+p.d+" "+p.tags.join(" ")).toLowerCase())}">
+  <div class="media"><img class="soggetto" src="${img("cover_soggetto")}" alt="" loading="lazy" onload="this.classList.toggle('largo',this.naturalWidth/this.naturalHeight>2.6)"></div>
+  <div class="testo">
+   <div class="meta"><b>${esc(p.formato||"Pagina")}</b><span>${esc(p.y)}</span></div>
+   <h3><a href="${esc(href)}">${esc(p.t)}</a></h3>
+   <p>${esc(p.d)}</p>
+   <div class="piede"><div class="tags">${p.tags.slice(0,3).map(esc).join(" · ")}</div>${p.codice===false||!p.live?"":`<a class="codice" href="https://github.com/FedeGambe/${esc(p.repo)}">Codice</a>`}</div>
+  </div>
+ </article>`};
 
 function render(){
-tags=[...new Set(P.flatMap(p=>p.tags))].sort();
-grid.innerHTML=P.map((p,i)=>`
- <article class="card${LIGHT.includes(p.repo)?" light":""}" style="animation-delay:${i*80}ms;${p.colore?`--col:${p.colore};`:""}--sfondo:url(${p.img.replace('cover_verticale','cover_sfondo')})" data-s="${(p.t+" "+p.d+" "+p.tags.join(" ")).toLowerCase()}" data-t="${p.tags.join("|")}">
-  <img class="cover" src="${p.img}" alt="" loading="lazy">
-  ${p.img.endsWith("cover_verticale.svg")?`<img class="soggetto" onload="this.classList.toggle('largo',this.naturalWidth/this.naturalHeight>2.6)" src="${p.img.replace("cover_verticale","cover_soggetto")}" alt="" loading="lazy">`:""}
-  <a class="vai" href="${p.live||"https://github.com/FedeGambe/"+p.repo}" aria-label="${p.t}"></a>
-  <div class="body">
-   <div class="meta"><span>N° ${String(i+1).padStart(2,"0")}</span><span>${p.y}${p.live?" · ● online":""}</span></div>
-   <h2>${p.t}</h2><p>${p.d}</p>
-   </div>
-   <div class="foot"><div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div></div>
-   <div class="links">${p.live?`<a class="main" href="${p.live}">Apri →</a>`:""}${p.codice===false?"":`<a class="${p.live?"":"main"}" href="https://github.com/FedeGambe/${p.repo}">Codice</a>`}</div>
- </article>`).join("");
-
-chips.innerHTML=["Tutti",...tags].map((t,i)=>`<button class="chip" aria-pressed="${i==0}" data-t="${i?t:""}">${t}</button>`).join("");
-
+  const gr=GRUPPI.map(g=>({...g,p:P.filter(p=>(p.tipo||"analisi")===g.k)})).filter(g=>g.p.length);
+  $("#gruppi").innerHTML=gr.map(g=>`<section class="gruppo" data-k="${g.k}">
+   <header><h2>${g.t}</h2><span>${g.s} · ${g.p.length}</span></header>
+   <p class="descr">${g.d}</p>
+   <div class="grid">${g.p.map(card).join("")}</div></section>`).join("");
+  chips.innerHTML=[{k:"",t:"Tutti",n:P.length},...gr.map(g=>({k:g.k,t:g.t,n:g.p.length}))]
+    .map(c=>`<button class="chip" aria-pressed="${!c.k}" data-k="${c.k}">${c.t}<small>${c.n}</small></button>`).join("");
+}
 function filter(){
   const q=$("#q").value.trim().toLowerCase();let n=0;
-  document.querySelectorAll(".card").forEach(c=>{
-    const ok=c.dataset.s.includes(q)&&(!tag||c.dataset.t.split("|").includes(tag));
-    c.hidden=!ok;n+=ok;
+  document.querySelectorAll(".gruppo").forEach(g=>{
+    let m=0;
+    if(!tipo||g.dataset.k===tipo) g.querySelectorAll(".card").forEach(c=>{const ok=c.dataset.s.includes(q);c.hidden=!ok;m+=ok});
+    g.hidden=!m;n+=m;
   });
   $("#empty").style.display=n?"none":"block";
 }
 chips.onclick=e=>{
   const b=e.target.closest(".chip");if(!b)return;
-  tag=b.dataset.t||null;
+  tipo=b.dataset.k||null;
   chips.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b));
   filter();
 };
 $("#q").oninput=filter;
-
-$("#n-all").textContent=P.length;
-$("#n-live").textContent=P.filter(p=>p.live).length;
-$("#n-tags").textContent=tags.length;
 $("#y").textContent=new Date().getFullYear();
-}
+
 const RAW="https://raw.githubusercontent.com/FedeGambe/";
 const scheda=async p=>{if(p.t)return p;try{const b=RAW+p.repo+"/main/docs/",j=await(await fetch(b+"progetto.json")).json();return{...j,...p,img:b+j.img}}catch{return null}};
 fetch("progetti.json").then(r=>r.json()).then(d=>Promise.all(d.map(scheda))).then(d=>{P=d.filter(Boolean);render()}).catch(()=>{$("#empty").textContent="Impossibile caricare i progetti.";$("#empty").style.display="block"});
