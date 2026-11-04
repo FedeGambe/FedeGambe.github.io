@@ -20,6 +20,11 @@
         "formato": "Pagina"
     },
     {
+        "repo": "bond-market-analysis",
+        "tipo": "analisi",
+        "formato": "Pagina"
+    },
+    {
         "repo": "When_to_buy_iPhone",
         "tipo": "analisi",
         "formato": "Pagina"
