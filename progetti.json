@@ -15,6 +15,11 @@
         "formato": "App"
     },
     {
+        "repo": "ledino-clawd-monitor",
+        "tipo": "strumento",
+        "formato": "Pagina"
+    },
+    {
         "repo": "Target_Maturity_ETF_Planner",
         "tipo": "analisi",
         "formato": "Pagina"
