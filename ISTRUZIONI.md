@@ -127,7 +127,7 @@ In `progetti.json` aggiungi una voce con il nome della repo, il gruppo e cosa si
 
 - `tipo`: `strumento` (dashboard, simulatori, app: si usano), `analisi` (pagine da leggere) o `studio` (tesi). Se manca vale `analisi`.
 - `formato`: cosa si apre cliccando, scritto sopra il titolo della card (`Pagina`, `Dashboard`, `App`, `Pagina + dashboard`). Se manca vale `Pagina`.
-- L'ordine nel file è l'ordine delle card dentro ogni gruppo.
+- L'ordine nel file non conta: dentro ogni gruppo le card si ordinano dalla pagina, per nome (A–Z) o per data di creazione della repo su GitHub, con la freccia per invertire. La scelta resta salvata nel browser.
 - **Attenzione alle virgole.** Va una virgola tra una voce e l'altra, mai dopo l'ultima. Una virgola di troppo rompe tutto il file, e il sito mostra "Impossibile caricare i progetti".
   Per controllare: `python3 -m json.tool progetti.json`, che non deve dare errori.
 
