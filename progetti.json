@@ -20,6 +20,11 @@
         "formato": "Pagina"
     },
     {
+        "repo": "strip-street",
+        "tipo": "strumento",
+        "formato": "Pagina + app"
+    },
+    {
         "repo": "Target_Maturity_ETF_Planner",
         "tipo": "analisi",
         "formato": "Pagina"
